@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<link rel="stylesheet" href="./css/jquery.toast.min.css"/>
+	<link rel="stylesheet" href="./css/controltower.css">
+</head>
+<body>
+	<div id="container">
+	
+		<!-- 로그인 모달 창 -->
+		<div id="loginModal" class="modal" style="display:block">
+			<div class="modal-container">
+				<div class="aligner">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h2>원격지원 시스템 로그인</h2>
+						</div>
+						<div class="modal-body">
+							<div class="login-frm">
+								<label for="username" class="lb">관리자 ID</label>
+								<div class="frmwrap">
+									<input id="username" class="tfield" placeholder="관리자 이름" />
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" id="login-btn" class="bt">로그인</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 화상통화 요청 모달 창 -->
+		<div id="callingModal" class="modal">
+			<div class="modal-container">
+				<div class="aligner">
+					<div class="modal-content">
+						<div class="modal-body">
+							<p class="noti">AR 작업자가 화상 통신을 요청하고 있습니다.</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" id="calling-cancel-btn" class="bt cancel">거절</button>
+							<button type="button" id="calling-accept-btn" class="bt confirm">받기</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 화면공유 모달 창 (사용 안함) -->
+		<div id="windowModal" class="modal">
+			<div class="modal-container">
+				<div class="aligner">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h2>화면공유</h2>
+							<p class="noti">arnova.run.goorm.io에서 화면의 내용을 공유하려고 합니다. 공유할 항목을 선택하세요.</p>
+						</div>
+						<div class="modal-body">
+							<ul class="tab">
+								<li class="selected"><!-- 선택 시 selected --><button type="button" class="tab-bt">전체 화면</button></li>
+								<li><button type="button" class="tab-bt">응용 프로그램 창</button></li>
+								<li><button type="button" class="tab-bt">Microsoft Edge 탭</button></li>
+							</ul>
+							<div class="tab-content" style="height:600px">
+								<ul class="window-list">
+									<li><a href="#" class="item selected"><!-- 선택 시 selected --><div class="preview" style="width:142px;height:252px"></div><span class="name">모바일 0001</span></a></li>
+									<li><a href="#" class="item"><div class="preview" style="width:142px;height:252px"></div><span class="name">arnova003xxz</span></a></li>
+									<li><a href="#" class="item"><div class="preview" style="width:448px;height:252px"></div><span class="name">화면 1</span></a></li>
+									<li><a href="#" class="item"><div class="preview" style="width:448px;height:252px"></div><span class="name">화면 4</span></a></li>
+									<li><a href="#" class="item"><div class="preview" style="width:142px;height:252px"></div><span class="name">testtest</span></a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" id="calling-accept-btn" class="bt s cancel">취소</button>
+							<button type="button" id="calling-cancel-btn" class="bt s confirm">공유</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 관제 시스템 메인 창 -->
+		<div id="main-header">
+			<h2 class="page-title">화학방재 AR 원격지원 시스템</h2>
+			<h6 id="admin-name">NameIs</h6>
+			<!--작업자 이름 표시-->
+		</div>
+		<div id="main-content">
+			<div id="main-body" style="display:none"><!--display:table-->
+				<div class="main-content-block">
+					<div id="video-section" class="viewer">
+						<div class="msg"><span class="txt">Unconnected</span></div>
+<!--						<video id="remote-view" autoplay></video>-->
+						<video id="remote-view" autoplay style="transform:rotate(90deg);"></video>
+					</div>
+					<div id="nav-control-btns" class="video-controls">
+						<div class="buttons">
+							<button type="button" id="record-btn" class="bt">녹화</button>
+							<button type="button" id="save-btn" class="bt">저장</button>
+							<button type="button" id="hangup-btn" class="bt">끊기</button>
+						</div>
+					</div>
+				</div>
+				<div class="main-content-block">
+					<div id="chat-section" class="viewer">
+						
+					</div>
+					<div id="noti-message-section" class="chat-controls">
+						<div class="frm">
+							<input id="noti-message-input" class="tfield" onkeyup="handleKey(event);"/>
+						</div>
+						<div class="buttons">
+							<button type="button" id="noti-message-send-btn" class="bt" onclick="handleSendButton();">메시지 전송</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="main-footer">
+			<ul class="ci-list">
+				<li><img src="img/ci_ucc.png" alt="ULSAN CONTENTS CO-WORK PLACE" /></li>
+				<li><img src="img/ci_encore.png" alt="en.core" /></li>
+				<li><img src="img/ci_novatech.png" alt="NOVATECH" /></li>
+				<li><img src="img/ci_neo.png" alt="네오 엔터테인먼트" /></li>
+			</ul>
+		</div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script> 
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+	<script src="./js/jquery.toast.min.js"></script>
+	<script src="./js/controltower.js"></script>
+		
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no,viewport-fit=cover">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<link rel="stylesheet" href="./css/jquery.toast.min.css"/>
+	<link rel="stylesheet" href="./css/client.css">
+</head>
+<body>
+	<div id="container">
+
+		<!-- 로그인 모달 창 -->
+		<div id="loginModal" class="modal">
+			<div class="modal-container">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h2>원격지원 시스템 로그인</h2>
+					</div>
+					<div class="modal-body">
+						<div class="login-frm">
+							<label for="username" class="lb">작업자</label>
+							<div class="frmwrap">
+								<input id="username" class="tfield" placeholder="작업자 이름" />
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" id="login-btn" class="bt">로그인</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 기기설정 모달 창 -->
+		<div id="configModal" class="modal">
+			<div class="modal-container">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h2>환경 설정</h2>
+					</div>
+					<div class="modal-body">
+						<div class="frmwrap">
+							<select id="audio-sel" class="select">
+							</select>
+						</div>
+						<div class="frmwrap">
+							<select id="camera-sel" class="select">
+							</select>
+						</div>
+						<div class="preview">
+							<img src="img/guide_4x3.gif" alt="" /> 
+							<div class="viewer">
+								<div class="msg"><span class="txt">Unconnected</span></div>
+								<video id="preview" autoplay muted></video>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" id="config-ok-btn" class="bt confirm">확인</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 화상통화 모달 창 -->
+		<div id="callModal" class="modal">
+			<div class="modal-container">
+	            <div class="main-content-block">
+					<div id="video-section" class="preview">
+						<img src="img/guide_4x3.gif" alt="" /> 
+						<div class="viewer" id="video-player">
+							<div class="msg"><span class="txt">센터와 연결중입니다…</span></div>
+							<video id="remote-view" autoplay></video>
+							<button type="button" class="icbt" id="fullscreen-btn"><img src="img/ic_fullscreen.png" alt="" /></button>
+							<button type="button" class="icbt" id="fullscreen-exit-btn"><img src="img/ic_fullscreen_exit.png" alt="" /></button>
+						</div>
+						<button type="button" class="icbt cancel" id="call-cancel-btn"><img src="img/ic_fincall.png" alt="" /><span class="name">통화 종료</span></button>
+					</div>
+				</div>
+            	<div class="main-content-block">
+					<div id="chat-section" class="viewer">
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 메인화면 전화걸기 -->
+		<div id="main-header">
+			<h2 class="page-title">화학방재 AR 원격지원 시스템</h2>
+			<!--작업자 이름 표시-->
+		</div>
+		<div id="main-content">
+			<div id="main-body">
+				<div class="aligner">
+					<ul class="center-list">
+						<li>
+							<button type="button" id="call-btn1" class="icbt"><img src="img/ic_call.png" alt="" /></button><span class="name">관제실</span>
+						</li>
+						<li>
+							<button type="button" id="call-btn2" class="icbt"><img src="img/ic_call.png" alt="" /></button><span class="name">전기실</span>
+						</li>
+						<li>
+							<button type="button" id="call-btn3" class="icbt"><img src="img/ic_call.png" alt="" /></button><span class="name">기계실</span>
+						</li>
+						<!-- element가 3개씩 쌍으로 호출되어야 합니다-->
+						<!-- 예시>> -->
+						<li>
+							<button type="button" id="call-btn_h" class="icbt"><img src="img/ic_home.png" alt="" /></button><span class="name">Etc. room</span>
+						</li>
+						<li></li>
+						<li></li>
+					</ul>
+				</div>
+			</div>
+			<div id="main-footer">
+				<div class="aligner al">
+					<button type="button" id="config-btn" class="icbt"><img src="img/ic_setting.png" alt="" /></button>
+				</div>
+				<div class="aligner ar">
+					<!--<button type="button" class="bt">한국어</button>-->
+<!--					<button type="button" id="lingual-btn" class="icbt">ENG</button>-->
+				</div>
+			</div>
+		</div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script> 
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script src="./js/jquery.toast.min.js"></script>
+    <script src="./js/client.js"></script>
+
+</body>
+</html>
